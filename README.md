@@ -21,8 +21,10 @@ Where:
 For the corrected fitting procedure, the convolved function is calculated as:
 
 $$
+\begin{gather}
 fl=fl(t)_{IRF}\otimes fl(t)\\
 fl_{fitted}=\sum_{i=1}^{\text{\# exponents}} C_i\cdot fl(t)_i
+\end{gather}
 $$
 
 Where:
