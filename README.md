@@ -5,6 +5,28 @@ This is a quick tool I wrote to take some of my TCSPC fluorescence lifetime fitt
 
 The app itself is a basic least squares regression tool but allows you to fit in linear or logarithmic space, supports up to 4 decays, and can export images as well as .csv files of the fitted histograms
 
+## Requirements
+
+* Python (I'm not sure how old you could go, but I know it runs on >3.9)
+* Matplotlib
+* Numpy
+* PyQt5
+* Scipy
+
+These can be installed pretty easily via pip
+
+```bash
+pip install matplotlib numpy scipy pyqt5
+```
+
+or conda
+
+```bash
+conda install matplotlib numpy scipy pyqt5
+```
+
+
+
 ## The Maths
 
 Uses the form of the function:
