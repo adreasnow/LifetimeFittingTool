@@ -192,7 +192,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Lifetime Fitting"))
         self.groupBox_4.setTitle(_translate("Form", "Input"))
         self.trf_browse.setText(_translate("Form", "Browse for TRF"))
         self.irf_browse.setText(_translate("Form", "Browse for IRF"))
