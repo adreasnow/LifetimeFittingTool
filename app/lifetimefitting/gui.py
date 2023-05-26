@@ -200,7 +200,7 @@ class Ui_Form(object):
         self.label.setText(_translate("Form", "Bin Width (ps)"))
         self.label_2.setText(_translate("Form", "Maximum Fitting Iterations"))
         self.label_5.setText(_translate("Form", "Offset for the Starting Bin"))
-        self.label_6.setText(_translate("Form", "Minimum Time (ns)"))
+        self.label_6.setText(_translate("Form", "Maximum Time to fit (ns)"))
         self.label_24.setText(_translate("Form", "Number of Decays to fit"))
         self.label_3.setText(_translate("Form", "Maximum Time to Plot (ns)"))
         self.logFit_widg.setText(_translate("Form", "Fit in Log Space"))
