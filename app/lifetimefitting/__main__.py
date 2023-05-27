@@ -1,9 +1,7 @@
 import matplotlib.pyplot as plt
-
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QFileDialog
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-
 from phdimporter import TRF
 from funcs.gui import Ui_Form
 from funcs.fittingFuncs import loadAndCull, fitFL
