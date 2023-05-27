@@ -26,7 +26,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Lifetime Fitting</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_11">
    <item>
@@ -178,7 +178,11 @@
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="startOffset_widg"/>
+              <widget class="QSpinBox" name="startOffset_widg">
+                <property name="maximum">
+                <number>999999</number>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QSpinBox" name="maxTime_widg">
