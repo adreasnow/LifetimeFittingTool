@@ -20,19 +20,19 @@ pip install lifetimefitting
 * Python (I'm not sure how old you could go, but I know it runs on >3.9)
 * Matplotlib
 * Numpy
-* PyQt5
+* PyQt6
 * Scipy
 
 These can be installed pretty easily via pip
 
 ```bash
-pip install matplotlib numpy scipy pyqt5
+pip install matplotlib numpy scipy pyqt6
 ```
 
 or conda
 
 ```bash
-conda install matplotlib numpy scipy pyqt5
+conda install matplotlib numpy scipy pyqt6
 ```
 
 Then you can clone the module down and install it manually
