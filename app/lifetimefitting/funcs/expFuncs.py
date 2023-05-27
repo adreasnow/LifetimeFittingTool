@@ -1,4 +1,4 @@
-import numpy as np
+import numpy as np 
 def expFunc(t, I0, τ) -> float:
     return np.multiply(np.exp(np.negative(np.divide(t, τ))), I0)
 
