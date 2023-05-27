@@ -113,9 +113,9 @@ def fitFL(plot=True, x_in=None, y_in=None, irf_in=None) -> None:
         if ui.plotIRF_widg.isChecked() and plot:
             ui.axList += ui.ax3.plot([i*binSize*1e-3 for i in range(len(irf))], irf, c='g')
 
-        x_func = np.arange(-2, ui.max_x_widg.value(), 0.01)
+        x_func = np.arange(-2, ui.max_x.value(), 0.01)
         # Log Plot
-        ui.ax1.set_xlim(-2, ui.max_x_widg.value())
+        ui.ax1.set_xlim(-2, ui.max_x.value())
         ui.axList += [ui.ax1.axvline(cutoff, c='r', lw=0.5)]
         ui.axList += [ui.ax1.scatter(x_raw, y_raw, s=0.1, c='b')]
         # Linear plot
@@ -256,16 +256,16 @@ def setupPlot():
 
 def savePlot():
     save_plot_dialog = QFileDialog()
-    save_plot_dialog.setFileMode(QFileDialog.AnyFile)
+    # save_plot_dialog.setFileMode(QFileDialog.AnyFile)
     name = save_plot_dialog.getSaveFileName(filter="PNG Image (*.png);;SVG Image (*.svg);;PDF Document (*.pdf)")[0]
     if name != '':
-        plt.savefig(name)
+        plt.savefig(name, dpi=900)
 
 def saveCSV():
     global csv
     if 'csv' in globals():
         save_csv_dialog = QFileDialog()
-        save_csv_dialog.setFileMode(QFileDialog.AnyFile)
+        # save_csv_dialog.setFileMode(QFileDialog.AnyFile)
         name = save_csv_dialog.getSaveFileName(filter="CSV Sheet (*.csv)")[0]
         if name != '':
             with open(name, 'w+') as f:
@@ -281,7 +281,7 @@ if __name__ == "__main__":
 
     # file loading
     file_dialog = QFileDialog()
-    file_dialog.setFileMode(QFileDialog.ExistingFile)
+    # file_dialog.setFileMode(QFileDialog.AnyFile)
     ui.trf_browse.clicked.connect(trf_browse)
     ui.irf_browse.clicked.connect(irf_browse)
     ui.plot_browse.clicked.connect(savePlot)
@@ -290,4 +290,4 @@ if __name__ == "__main__":
     ui.fit_button.clicked.connect(plotFL)
 
     Form.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
