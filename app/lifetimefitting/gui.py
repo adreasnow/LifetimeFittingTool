@@ -99,6 +99,7 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.maxIter_widg)
         self.startOffset_widg = QtWidgets.QSpinBox(parent=self.verticalGroupBox)
         self.startOffset_widg.setObjectName("startOffset_widg")
+        self.startOffset_widg.setMaximum(10000)
         self.verticalLayout.addWidget(self.startOffset_widg)
         self.maxTime_widg = QtWidgets.QSpinBox(parent=self.verticalGroupBox)
         self.maxTime_widg.setMaximum(9999999)
