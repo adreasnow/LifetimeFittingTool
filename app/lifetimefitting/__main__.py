@@ -25,6 +25,9 @@ def irf_browse():
 def update_max_x():
     ui.max_x_out.setValue(ui.max_x.value())
 
+def update_max_x_from_out():
+    ui.max_x.setValue(ui.max_x_out.value())
+
 def setupPlot():
     ui.horizontalLayout_plot = QtWidgets.QHBoxLayout(ui.frame)
     ui.horizontalLayout_plot.setObjectName("horizontalLayout_plot")
@@ -83,6 +86,7 @@ if __name__ == "__main__":
     ui.plot_browse.clicked.connect(savePlot)
     ui.csv_browse.clicked.connect(saveCSV)
     ui.max_x.sliderMoved.connect(update_max_x)
+    ui.max_x_out.valueChanged.connect(update_max_x_from_out)
 
     ui.fit_button.clicked.connect(plotFL)
 
