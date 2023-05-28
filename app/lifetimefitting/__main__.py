@@ -5,12 +5,22 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from phdimporter import TRF
 from funcs.gui import Ui_Form
 from funcs.fittingFuncs import loadAndCull, fitFL
+import sys
 
 def plotFL():
     global csv
+    plt.close('all')
     for i in ui.axList:
         i.remove()
     ui.axList = []
+    ui.ax1.relim()
+    ui.ax1.autoscale_view()
+    ui.ax2.relim()
+    ui.ax2.autoscale_view()
+    ui.ax3.relim()
+    ui.ax3.autoscale_view()
+    ui.ax4.relim()
+    ui.ax4.autoscale_view()
     _, irf, loaded1 = loadAndCull(ui.irf_file, ui)
     x, y, loaded2 = loadAndCull(ui.trf_file, ui)
     if loaded1 and loaded2:
@@ -41,7 +51,6 @@ def setupPlot():
     ui.ax1.set_ylim(1e-1, 1e5, auto=False)
     ui.ax1.axhline(0, c='k', lw=0.5)
     ui.ax1.axvline(0, c='k', lw=0.5)
-    ui.ax1.set_xlabel('Time (ns)')
     ui.ax1.set_ylabel('Counts')
     # linear plot
     ui.ax3.set_ylabel('Counts')
@@ -72,7 +81,6 @@ def saveCSV():
                 f.writelines(csv)
 
 if __name__ == "__main__":
-    import sys
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form()

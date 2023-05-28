@@ -3,9 +3,9 @@ import numpy as np
 from phdimporter import TRF
 from scipy.optimize import curve_fit
 from PyQt6.QtWidgets import QFileDialog, QMessageBox, QLineEdit
-from .gui import Ui_Form
-from .expFuncs import linFuncWC, linFuncx2, linFuncx3, linFuncx4
-from .expFuncs import expFunc, expFuncWC, expFuncx2, expFuncx3, expFuncx4
+from gui import Ui_Form
+from expFuncs import linFuncWC, linFuncx2, linFuncx3, linFuncx4
+from expFuncs import expFunc, expFuncWC, expFuncx2, expFuncx3, expFuncx4
 
 
 def chiSQ(y_obs, y_pred, popt) -> float:
@@ -65,6 +65,7 @@ def fitLifetime(ui, x, y, maxIter):
     return popt, residual
 
 def fitFL(ui, plot=True, x_in=None, y_in=None, irf_in=None) -> None:
+    
     csv = 'x,y_lin,y_log\n'
     csvTail = '\n'
     outPrint = ''
@@ -192,11 +193,13 @@ def fitFL(ui, plot=True, x_in=None, y_in=None, irf_in=None) -> None:
                 ui.axList += ui.ax3.plot(x_func, expFunc(x_func, I0, τ), 'g--', lw=0.5)
         ui.axList += ui.ax1.plot(x_func, FLFuncList[expCount](x_func, *popt), 'k--', lw=1)
         ui.axList += ui.ax3.plot(x_func, FLFuncList[expCount](x_func, *popt), 'k--', lw=1)
-        # ax1.scatter([d], [I0], c='purple')
+
         residualList = np.subtract(FLLinFuncList[expCount](x, *popt), np.log(y))
         ui.axList += [ui.ax2.scatter(x, residualList, s=0.1, c='b')]
         residualList = np.subtract(FLFuncList[expCount](x, *popt), y,)
         ui.axList += [ui.ax4.scatter(x, residualList, s=0.1, c='b')]
+        
+
         ui.canvas.draw()
         ui.text_output.setText(outPrint)
 
