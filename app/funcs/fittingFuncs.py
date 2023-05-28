@@ -3,9 +3,9 @@ import numpy as np
 from phdimporter import TRF
 from scipy.optimize import curve_fit
 from PyQt6.QtWidgets import QFileDialog, QMessageBox, QLineEdit
-from gui import Ui_Form
-from expFuncs import linFuncWC, linFuncx2, linFuncx3, linFuncx4
-from expFuncs import expFunc, expFuncWC, expFuncx2, expFuncx3, expFuncx4
+from .gui import Ui_Form
+from .expFuncs import linFuncWC, linFuncx2, linFuncx3, linFuncx4
+from .expFuncs import expFunc, expFuncWC, expFuncx2, expFuncx3, expFuncx4
 
 
 def chiSQ(y_obs, y_pred, popt) -> float:
