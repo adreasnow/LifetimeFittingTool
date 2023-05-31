@@ -4,8 +4,8 @@ from PyQt6.QtWidgets import QFileDialog
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from phdimporter import TRF
-from funcs.gui import Ui_Form
-from funcs.fittingFuncs import loadAndCull, fitFL
+from .funcs.gui import Ui_Form
+from .funcs.fittingFuncs import loadAndCull, fitFL
 import sys
 
 def plotFL():
