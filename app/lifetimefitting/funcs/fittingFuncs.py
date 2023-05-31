@@ -48,7 +48,7 @@ def fitLifetime(ui, x, y, maxIter):
     if ui.logFit_widg.isChecked():
         y = np.log(y)
         fitFunc = FLLinFuncList[expCount]
- 
+
     for i in range(expCount):
         minbounds += [0,     0]
         maxbounds += [99999999, 1]
@@ -65,7 +65,6 @@ def fitLifetime(ui, x, y, maxIter):
     return popt, residual
 
 def fitFL(ui, plot=True, x_in=None, y_in=None, irf_in=None) -> None:
-    
     csv = 'x,y_lin,y_log\n'
     csvTail = '\n'
     outPrint = ''
@@ -198,7 +197,6 @@ def fitFL(ui, plot=True, x_in=None, y_in=None, irf_in=None) -> None:
         ui.axList += [ui.ax2.scatter(x, residualList, s=0.1, c='b')]
         residualList = np.subtract(FLFuncList[expCount](x, *popt), y,)
         ui.axList += [ui.ax4.scatter(x, residualList, s=0.1, c='b')]
-        
 
         ui.canvas.draw()
         ui.text_output.setText(outPrint)

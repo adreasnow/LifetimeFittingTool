@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QFileDialog
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from phdimporter import TRF
 from funcs.gui import Ui_Form
 from funcs.fittingFuncs import loadAndCull, fitFL
@@ -39,11 +40,13 @@ def update_max_x_from_out():
     ui.max_x.setValue(ui.max_x_out.value())
 
 def setupPlot():
-    ui.horizontalLayout_plot = QtWidgets.QHBoxLayout(ui.frame)
-    ui.horizontalLayout_plot.setObjectName("horizontalLayout_plot")
+    ui.verticalLayout_plot = QtWidgets.QVBoxLayout(ui.frame)
+    ui.verticalLayout_plot.setObjectName("verticalLayout_plot")
     ui.figure, (ui.ax1, ui.ax3, ui.ax2, ui.ax4) = plt.subplots(4, 1, figsize=(8, 10), sharex=True, height_ratios=[3, 3, 1, 1])
     ui.canvas = FigureCanvas(ui.figure)
-    ui.horizontalLayout_plot.addWidget(ui.canvas)
+    ui.toolbar = NavigationToolbar(ui.canvas)
+    ui.verticalLayout_plot.addWidget(ui.canvas)
+    ui.verticalLayout_plot.addWidget(ui.toolbar)
     ui.axList = []
 
     # log plot
@@ -65,12 +68,6 @@ def setupPlot():
     ui.ax4.axvline(0, c='k', lw=0.5)
     ui.ax4.axhline(0, c='k', lw=0.5)
 
-def savePlot():
-    save_plot_dialog = QFileDialog()
-    name = save_plot_dialog.getSaveFileName(filter="PNG Image (*.png);;SVG Image (*.svg);;PDF Document (*.pdf)")[0]
-    if name != '':
-        plt.savefig(name, dpi=900)
-
 def saveCSV():
     global csv
     if 'csv' in globals():
@@ -91,7 +88,6 @@ if __name__ == "__main__":
     file_dialog = QFileDialog()
     ui.trf_browse.clicked.connect(trf_browse)
     ui.irf_browse.clicked.connect(irf_browse)
-    ui.plot_browse.clicked.connect(savePlot)
     ui.csv_browse.clicked.connect(saveCSV)
     ui.max_x.sliderMoved.connect(update_max_x)
     ui.max_x_out.valueChanged.connect(update_max_x_from_out)

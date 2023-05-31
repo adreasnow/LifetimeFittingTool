@@ -1,4 +1,4 @@
-from PyQt6 import QtCore, QtWidgets
+from PyQt6 import QtCore, QtGui, QtWidgets
 
 
 class Ui_Form(object):
@@ -121,7 +121,7 @@ class Ui_Form(object):
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.max_x = QtWidgets.QSlider(parent=self.verticalGroupBox)
-        self.max_x.setMaximum(500)
+        self.max_x.setMaximum(300)
         self.max_x.setProperty("value", 20)
         self.max_x.setSliderPosition(20)
         self.max_x.setOrientation(QtCore.Qt.Orientation.Horizontal)
@@ -133,8 +133,8 @@ class Ui_Form(object):
         self.horizontalLayout_6.addWidget(self.max_x)
         self.max_x_out = QtWidgets.QSpinBox(parent=self.verticalGroupBox)
         self.max_x_out.setButtonSymbols(QtWidgets.QAbstractSpinBox.ButtonSymbols.NoButtons)
-        self.max_x_out.setMaximum(500)
-        self.max_x_out.setValue(20)
+        self.max_x_out.setMaximum(300)
+        self.max_x_out.setProperty("value", 20)
         self.max_x_out.setObjectName("max_x_out")
         self.horizontalLayout_6.addWidget(self.max_x_out)
         self.verticalLayout_5.addLayout(self.horizontalLayout_6)
@@ -175,10 +175,6 @@ class Ui_Form(object):
         self.verticalLayout_5.addWidget(self.text_output)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.plot_browse = QtWidgets.QPushButton(parent=self.verticalGroupBox)
-        self.plot_browse.setAcceptDrops(True)
-        self.plot_browse.setObjectName("plot_browse")
-        self.horizontalLayout_3.addWidget(self.plot_browse)
         self.csv_browse = QtWidgets.QPushButton(parent=self.verticalGroupBox)
         self.csv_browse.setAcceptDrops(True)
         self.csv_browse.setObjectName("csv_browse")
@@ -218,5 +214,4 @@ class Ui_Form(object):
         self.scaled_widg.setText(_translate("Form", "Plot the Decays scaled by Their Coefficients"))
         self.fit_button.setText(_translate("Form", "Fit"))
         self.label_4.setText(_translate("Form", "Output"))
-        self.plot_browse.setText(_translate("Form", "Save Image"))
         self.csv_browse.setText(_translate("Form", "Save CSV"))
