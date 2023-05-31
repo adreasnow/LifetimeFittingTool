@@ -20,7 +20,7 @@ def loadAndCull(fc: QLineEdit, ui: Ui_Form):
     x = y = []
 
     if fc.text() == '':
-        QMessageBox(icon=QMessageBox.Critical, text='TRF or IRF not loaded!').exec_()
+        QMessageBox(icon=QMessageBox.Icon.Critical, text='TRF or IRF not loaded!').exec()
     else:
         filename = fc.text().split("/")[-1].split("\\")[-1]
         try:
@@ -30,9 +30,9 @@ def loadAndCull(fc: QLineEdit, ui: Ui_Form):
             ui.binSize_widg.setValue(trf.Resolution_int)
             loaded = True
         except struct.error:
-            QMessageBox(icon=QMessageBox.Critical, text=f'There was a problem reading {filename}').exec_()
+            QMessageBox(icon=QMessageBox.Icon.Critical, text=f'There was a problem reading {filename}').exec()
         except UnboundLocalError:
-            QMessageBox(icon=QMessageBox.Critical, text=f'There was a problem reading {filename}').exec_()
+            QMessageBox(icon=QMessageBox.Icon.Critical, text=f'There was a problem reading {filename}').exec()
 
     return x, y, loaded
 
@@ -126,7 +126,7 @@ def fitFL(ui, plot=True, x_in=None, y_in=None, irf_in=None) -> None:
     try:
         index = np.argmin(np.abs(np.array(x)-ui.maxTime_widg.value()))
     except ValueError:
-        QMessageBox(icon=QMessageBox.Critical, text=f'The chosen start offset of {ui.startOffset_widg.value()} was too large for the data').exec_()
+        QMessageBox(icon=QMessageBox.Icon.Critical, text=f'The chosen start offset of {ui.startOffset_widg.value()} was too large for the data').exec()
         return
 
     cutoff = x[index]
