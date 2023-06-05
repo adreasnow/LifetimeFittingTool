@@ -1,8 +1,7 @@
-from PyQt6 import QtCore, QtGui, QtWidgets
-
+from PyQt6 import QtCore, QtWidgets
 
 class Ui_Form(object):
-    def setupUi(self, Form):
+    def setupUi(self, Form: QtWidgets.QWidget):
         Form.setObjectName("Form")
         Form.setEnabled(True)
         Form.resize(1024, 900)
@@ -196,7 +195,7 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, Form: QtWidgets.QWidget):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Lifetime Fitting"))
         self.groupBox_4.setTitle(_translate("Form", "Input"))

@@ -8,7 +8,7 @@ from .funcs.gui import Ui_Form
 from .funcs.fittingFuncs import loadAndCull, fitFL
 import sys
 
-def plotFL():
+def plotFL() -> None:
     global csv
     plt.close('all')
     for i in ui.axList:
@@ -27,19 +27,19 @@ def plotFL():
     if loaded1 and loaded2:
         csv = fitFL(ui, x_in=x, y_in=y, irf_in=irf)
 
-def trf_browse():
+def trf_browse() -> None:
     ui.trf_file.setText(file_dialog.getOpenFileName(directory="/Users/adrea/gdrive/Monash/PhD/Fluorophore/data/tr/AAQ", filter="PicoHarp binary of text file (*.phd *.txt)")[0])
 
-def irf_browse():
+def irf_browse() -> None:
     ui.irf_file.setText(file_dialog.getOpenFileName(directory="/Users/adrea/gdrive/Monash/PhD/Fluorophore/data/tr/AAQ", filter="PicoHarp binary of text file (*.phd *.txt)")[0])
 
-def update_max_x():
+def update_max_x() -> None:
     ui.max_x_out.setValue(ui.max_x.value())
 
-def update_max_x_from_out():
+def update_max_x_from_out() -> None:
     ui.max_x.setValue(ui.max_x_out.value())
 
-def setupPlot():
+def setupPlot() -> None:
     ui.verticalLayout_plot = QtWidgets.QVBoxLayout(ui.frame)
     ui.verticalLayout_plot.setObjectName("verticalLayout_plot")
     ui.figure, (ui.ax1, ui.ax3, ui.ax2, ui.ax4) = plt.subplots(4, 1, figsize=(8, 10), sharex=True, height_ratios=[3, 3, 1, 1])
@@ -68,7 +68,7 @@ def setupPlot():
     ui.ax4.axvline(0, c='k', lw=0.5)
     ui.ax4.axhline(0, c='k', lw=0.5)
 
-def saveCSV():
+def saveCSV() -> None:
     global csv
     if 'csv' in globals():
         save_csv_dialog = QFileDialog()

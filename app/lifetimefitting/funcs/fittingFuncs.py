@@ -2,20 +2,19 @@ import struct
 import numpy as np
 from phdimporter import TRF
 from scipy.optimize import curve_fit
-from PyQt6.QtWidgets import QFileDialog, QMessageBox, QLineEdit
+from PyQt6.QtWidgets import QMessageBox, QLineEdit
 from .gui import Ui_Form
-from .expFuncs import linFuncWC, linFuncx2, linFuncx3, linFuncx4
-from .expFuncs import expFunc, expFuncWC, expFuncx2, expFuncx3, expFuncx4
+from .expFuncs import expFunc, expFuncWC
+from .expFuncs import FLFuncList, FLLinFuncList
 
-
-def chiSQ(y_obs, y_pred, popt) -> float:
+def chiSQ(y_obs: list[float], y_pred: list[float], popt: list[float]) -> float:
     dof = len(y_obs) - (len(popt))
     # ensure no divide by 0
     y_pred_max_1 = [i + 1 if i == 0 else i for i in y_pred]
     return np.sum(np.divide(np.square(np.subtract(y_obs, y_pred)), y_pred_max_1)) / len(y_pred)
 
 
-def loadAndCull(fc: QLineEdit, ui: Ui_Form):
+def loadAndCull(fc: QLineEdit, ui: Ui_Form) -> tuple[list[float], list[int], bool]:
     loaded = False
     x = y = []
 
@@ -36,9 +35,7 @@ def loadAndCull(fc: QLineEdit, ui: Ui_Form):
 
     return x, y, loaded
 
-def fitLifetime(ui, x, y, maxIter):
-    global FLFuncList
-    global FLLinFuncList
+def fitLifetime(ui: Ui_Form, x: list[float], y: list[float], maxIter: int) -> tuple[list[float], int]:
     expCount = ui.expCount_widg.value()
 
     minbounds = [max(y) - 500]
@@ -50,12 +47,12 @@ def fitLifetime(ui, x, y, maxIter):
         fitFunc = FLLinFuncList[expCount]
 
     for i in range(expCount):
-        minbounds += [0,     0]
+        minbounds += [0, 0]
         maxbounds += [99999999, 1]
 
     popt, pcov = curve_fit(fitFunc, x, y,
-                           bounds=(minbounds, maxbounds), 
-                           # maxfev=maxIter,
+                           bounds=(minbounds, maxbounds),
+                           maxfev=maxIter,
                            max_nfev=999999999999,
                            # verbose=2,
                            )
@@ -64,7 +61,7 @@ def fitLifetime(ui, x, y, maxIter):
 
     return popt, residual
 
-def fitFL(ui, plot=True, x_in=None, y_in=None, irf_in=None) -> None:
+def fitFL(ui: Ui_Form, plot: bool = True, x_in: list[float] = None, y_in: list[int] = None, irf_in: list[int] = None) -> str:
     csv = 'x,y_lin,y_log\n'
     csvTail = '\n'
     outPrint = ''
@@ -72,13 +69,8 @@ def fitFL(ui, plot=True, x_in=None, y_in=None, irf_in=None) -> None:
     binSize = ui.binSize_widg.value()
     expCount = ui.expCount_widg.value()
 
-    global FLFuncList
-    global FLLinFuncList
     global t
     global spectrumObject
-
-    FLFuncList = [expFuncWC, expFuncWC, expFuncx2, expFuncx3, expFuncx4]
-    FLLinFuncList = [linFuncWC, linFuncWC, linFuncx2, linFuncx3, linFuncx4]
 
     irf = irf_in
     irf = np.array(irf)
@@ -100,7 +92,7 @@ def fitFL(ui, plot=True, x_in=None, y_in=None, irf_in=None) -> None:
     y_raw = y_in
 
     max_y = max(y_raw)
-    irf = list(reversed(irf)) # the kernel is flipped in convolutions
+    irf = list(reversed(irf))  # the kernel is flipped in convolutions
     y_raw = np.append(y_raw, np.zeros((len(y_raw), 1)))
     y_raw = np.convolve(y_raw, irf, 'full')
     x_raw = [i*binSize*1e-3 for i in range(len(y_raw))]
