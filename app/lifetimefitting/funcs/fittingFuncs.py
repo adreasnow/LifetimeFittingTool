@@ -52,7 +52,7 @@ def fitLifetime(ui: Ui_Form, x: list[float], y: list[float], maxIter: int) -> tu
 
     popt, pcov = curve_fit(fitFunc, x, y,
                            bounds=(minbounds, maxbounds),
-                           maxfev=maxIter,
+                        #    maxfev=maxIter,
                            max_nfev=999999999999,
                            # verbose=2,
                            )
