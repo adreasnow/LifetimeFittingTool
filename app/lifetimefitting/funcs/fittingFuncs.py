@@ -20,10 +20,12 @@ def loadAndCull(fc: QLineEdit, ui: Ui_Form) -> tuple[list[float], list[int], boo
 
     if fc.text() == '':
         QMessageBox(icon=QMessageBox.Icon.Critical, text='TRF or IRF not loaded!').exec()
+    elif fc.text()[-4:] == '.asc' and ui.binSize_widg.value() == 0.0:
+        QMessageBox(icon=QMessageBox.Icon.Critical, text='BinWidth must be manually set when using .asc files').exec()
     else:
         filename = fc.text().split("/")[-1].split("\\")[-1]
         try:
-            trf = TRF(fc.text())
+            trf = TRF(fc.text(), binSize=ui.binSize_widg.value())
             y = trf.y
             x = trf.x
             ui.binSize_widg.setValue(trf.Resolution_int)

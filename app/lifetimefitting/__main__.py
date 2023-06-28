@@ -1,12 +1,18 @@
 import matplotlib.pyplot as plt
-from PyQt6 import QtWidgets
-from PyQt6.QtWidgets import QFileDialog
+from PyQt6 import QtWidgets, uic
+from PyQt6.QtWidgets import QFileDialog, QMainWindow, QApplication
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from phdimporter import TRF
-from .funcs.gui import Ui_Form
+from pathlib import Path
 from .funcs.fittingFuncs import loadAndCull, fitFL
 import sys
+
+class Ui(QMainWindow):
+    def __init__(self) -> None:
+        super(Ui, self).__init__()
+        uic.loadUi(f'{Path(__file__).parent.resolve()}/../lifetimeGui.ui', self)
+        self.show()
 
 def plotFL() -> None:
     global csv
@@ -28,10 +34,22 @@ def plotFL() -> None:
         csv = fitFL(ui, x_in=x, y_in=y, irf_in=irf)
 
 def trf_browse() -> None:
-    ui.trf_file.setText(file_dialog.getOpenFileName(directory="/Users/adrea/gdrive/Monash/PhD/Fluorophore/data/tr/AAQ", filter="PicoHarp binary of text file (*.phd *.txt)")[0])
+    file_dialog = QFileDialog()
+    directory = ''
+    if ui.trf_file.text() != '':
+        path = Path(ui.trf_file.text())
+        if path.exists:
+            directory = path.parent.as_posix()
+    ui.trf_file.setText(file_dialog.getOpenFileName(directory=directory, filter="Photon Time Histrogram (*.phd *.txt *.asc)")[0])
 
 def irf_browse() -> None:
-    ui.irf_file.setText(file_dialog.getOpenFileName(directory="/Users/adrea/gdrive/Monash/PhD/Fluorophore/data/tr/AAQ", filter="PicoHarp binary of text file (*.phd *.txt)")[0])
+    file_dialog = QFileDialog()
+    directory = ''
+    if ui.trf_file.text() != '':
+        path = Path(ui.trf_file.text())
+        if path.exists:
+            directory = path.parent.as_posix()
+    ui.irf_file.setText(file_dialog.getOpenFileName(directory=directory, filter="Photon Time Histrogram (*.phd *.txt *.asc)")[0])
 
 def update_max_x() -> None:
     ui.max_x_out.setValue(ui.max_x.value())
@@ -78,14 +96,10 @@ def saveCSV() -> None:
                 f.writelines(csv)
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
+    app = QApplication(sys.argv)
+    ui = Ui()
     setupPlot()
 
-    # file loading
-    file_dialog = QFileDialog()
     ui.trf_browse.clicked.connect(trf_browse)
     ui.irf_browse.clicked.connect(irf_browse)
     ui.csv_browse.clicked.connect(saveCSV)
@@ -94,5 +108,4 @@ if __name__ == "__main__":
 
     ui.fit_button.clicked.connect(plotFL)
 
-    Form.show()
     sys.exit(app.exec())
