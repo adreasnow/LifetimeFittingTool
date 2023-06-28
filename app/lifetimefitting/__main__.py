@@ -11,7 +11,7 @@ import sys
 class Ui(QMainWindow):
     def __init__(self) -> None:
         super(Ui, self).__init__()
-        uic.loadUi(f'{Path(__file__).parent.resolve()}/lifetimeGui.ui', self)
+        uic.loadUi(f'{Path(__file__).parent.resolve()}/funcs/lifetimeGui.ui', self)
         self.show()
 
 def plotFL() -> None:
