@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Form</class>
- <widget class="QWidget" name="Form">
-  <property name="enabled">
-   <bool>true</bool>
-  </property>
+ <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -28,6 +25,7 @@
   <property name="windowTitle">
    <string>Lifetime Fitting</string>
   </property>
+  <widget class="QWidget" name="centralwidget">
   <layout class="QVBoxLayout" name="verticalLayout_11">
    <item>
     <widget class="QGroupBox" name="groupBox_4">
@@ -48,14 +46,14 @@
           <item>
            <widget class="QLineEdit" name="trf_file">
             <property name="readOnly">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QLineEdit" name="irf_file">
             <property name="readOnly">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -375,6 +373,7 @@
     </widget>
    </item>
   </layout>
+  </widget>
  </widget>
  <resources/>
  <connections/>
