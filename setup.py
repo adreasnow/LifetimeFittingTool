@@ -5,7 +5,7 @@ with open("README.md", "r", encoding = "utf-8") as fh:
 
 setup(
     name = "lifetimefitting",
-    version = "0.0.28",
+    version = "0.0.29",
     author = "Adrea Snow",
     author_email = "adrea.snow@gmail.com",
     description = "PicoHarp TCSPC lifetime fitting tool",
@@ -19,7 +19,10 @@ setup(
     ],
     package_dir = {"": "app"},
     packages = find_packages(where="app"),
+    package_data={'': ['lifetimeGui.ui']},
+    include_package_data=True,
     extras_require = {"dev": ["twine>=4.0.2"]},
     install_requires=['matplotlib', 'numpy', 'scipy', 'pyqt6', 'phdimporter>=0.0.3'],
     python_requires = ">=3.8",
 )
+
