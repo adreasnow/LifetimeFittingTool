@@ -84,6 +84,8 @@ Where:
 $\chi^2$ is calculated as per [fluortools](http://www.fluortools.com/software/decayfit/documentation/fit)
 
 $$
-\chi^2 = \sum_{j=1}^{n} (c_j-\hat{c_j})^2/\hat{c_j}\\
-\chi^2_{red}=\frac{\chi^2}{n}
+\begin{align}
+\chi^2 &= \sum_{j=1}^{n} (c_j-\hat{c_j})^2/\hat{c_j}\\
+\chi^2_{red} &= \frac{\chi^2}{n}
+\end{align}
 $$
